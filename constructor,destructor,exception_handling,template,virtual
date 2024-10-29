@@ -1,0 +1,579 @@
+class:-
+
+ #include<iostream>
+using namespace std;
+class hero{ //called class
+    public:
+    int mynum;
+    string mystring;
+};
+int main(){
+    hero h1;//this is called object
+    h1.mystring="ruchi";
+    h1.mynum=43;
+    cout<<h1.mystring<<endl;
+    cout<<h1.mynum<<endl;
+    return 0;
+}
+
+
+2)access modifiers
+
+#include<iostream>
+using namespace std;
+
+class hero { // called class
+    public:
+        int mynum;
+        string mystring;
+    protected:
+        int salary;
+    public:
+        void setSalary(int s) { // Setter for salary
+            salary = s;
+        }
+        int getSalary() { // Getter for salary
+            return salary;
+        }
+};
+
+int main() {
+    hero h1; // this is called object
+    h1.mystring = "ruchi";
+    h1.mynum = 43;
+    h1.setSalary(20000); // Setting salary through setter method
+    cout << h1.mystring << endl;
+    cout << h1.mynum << endl;
+    cout << h1.getSalary() << endl; // Getting salary through getter method
+    return 0;
+}
+3)memory allocation(static and dynamic allocation)
+
+#include<iostream>
+using namespace std;
+
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5}; // Static allocation for an array of 5 integers
+    cout << "Static array elements: ";
+    for(int i = 0; i < 5; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
+
+deallocation=Deallocate" ka matlab hai pahle se allocate (yaani reserve ki gayi) memory ko free karna ya wapas system ko dena jab hume uski zaroorat nahi hoti. Yeh memory management ka ek important part hai, especially jab hum dynamic memory allocation karte hain.
+
+For example, C++ mein jab hum new operator se dynamic memory allocate karte hain (jaise int* arr = new int[n];), toh humne kuch memory reserve kar li system se. Jab hum is memory ka kaam khatam kar lete hain, toh hume delete[] arr; likhna padta hai, jo us memory ko free (deallocate) kar deta hai. Is se woh memory phir se system ke paas available ho jaati hai aur dusre programs bhi usse use kar sakte hain.
+
+Agar hum deallocation nahi karenge, toh yeh memory leak ka reason ban sakta hai, jo system memory ko overflow kar sakta hai aur program ki performance ko impact kar sakta hai.
+
+#include<iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter the size of the array: ";
+    cin >> n;
+
+    int* arr = new int[n]; // Dynamic allocation for an array of 'n' integers
+
+    cout << "Enter array elements: ";
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    cout << "Dynamic array elements: ";
+    for(int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    delete[] arr; // Deallocating the memory
+    return 0;
+}
+
+
+4) constructor = A constructor in C++ is a special method that is automatically called when an object of a class is created.
+
+To create a constructor, use the same name as the class, followed by parentheses ():
+
+#include<iostream>
+using namespace std;
+class B{
+public:
+B(){
+cout<<"this is my constructor";
+}};
+int main(){
+B b1;
+return 0;
+}
+
+3 types of constructor --->Constructor Parameters
+
+#include<iostream>
+using namespace std;
+class Bmw{
+    public:
+    string brand;
+    string model;
+    int year;
+    Bmw(string x,string y,int z){//parameter constructor
+    brand=x;
+    model=y;
+    year=z;
+    }
+};
+int main(){
+    Bmw bmw1("mahindra","t2",1998);
+    Bmw bmw2("tata","t4",2000);
+    cout<<endl<<bmw1.brand<<" first is"<<bmw1.model<<"like"<<bmw1.year<<"yup"<<endl;
+    cout<<endl<<bmw2.brand<<"second bmw"<<bmw2.model<<"like"<<endl<<bmw2.year<<"yes"<<endl;
+    return 0;
+    
+    
+}
+
+------>scope resolution ::
+
+#include<iostream>
+using namespace std;
+class Bmw{
+    public:
+    string brand;
+    string model;
+    int year;
+    Bmw(string x,string y,int z);//parameter constructor
+};
+//constructor define outside the class
+Bmw::Bmw(string x,string y,int z){
+    brand=x;
+    model=y;
+    year=z;
+}
+int main(){
+    Bmw bmw1("mahindra","t2",1998);
+    Bmw bmw2("tata","t4",2000);
+    cout<<bmw1.brand<<" "<<" first is"<<" "<<bmw1.model<<" "<<bmw1.year<<" "<<"yup"<<endl;
+    cout<<bmw2.brand<<" "<<"second bmw"<<" "<<bmw2.model<<" "<<bmw2.year<<endl;
+    return 0;
+}
+
+--------> default constructor
+
+#include<iostream>
+using namespace std;
+class A{ //default constructor
+    int a;
+    public:
+    A(){
+        a=100;
+        cout<<a;
+    }
+};
+int main(){
+    A obj;
+    return 0;
+}
+
+---------> parametrized constructor
+#include<iostream>
+using namespace std;
+
+class College {
+    private:
+        int a, b;
+    public:
+        string name;
+        
+        College(int x, int y) { // Parameterized constructor
+            a = x;
+            b = y;
+        }
+
+        void show() { // Changed return type to void
+            cout << a << " " << b << "\n";
+        }
+};
+
+int main() {
+    College c1(20, 30); // Calling parameterized constructor
+    c1.name = "ragini sharma";
+    c1.show();
+    cout << c1.name;
+    return 0;
+}
+
+---->>copy constructor
+
+
+#include<iostream>
+using namespace std;
+class vehicles{
+    private:
+    int a,b;
+    public:
+    vehicles(int x,int y){//paramterized constructor
+        a=x,b=y;
+    }
+    vehicles(vehicles &ref){//copy constructor
+        a=ref.a;
+        b=ref.b;
+    }
+    void show(){
+        cout<<a<<" "<<b<<endl;
+        
+    }
+};
+int main(){
+    vehicles v1(10,20);///paramter
+    vehicles v2=v1;//copy
+    v1.show();
+    v2.show();
+    return 0;
+}
+
+------> teeno ek saath kia hai constructor
+
+#include<iostream>
+using namespace std;
+class Placement{
+    private:
+    float package;
+    int companycode;
+   /* public:
+    string companyname;
+    int totalstudents;*/
+    
+    public:
+    void setpackage(int p){
+        package=p;
+    }
+    int getpackage(){
+        return package;
+    }
+    void setcompanycode(int cc){
+        companycode=cc;
+    }
+    int getcompanycode(){
+        return companycode;
+    }
+    Placement(int x,int y){
+        package=x;companycode=y;
+    }
+   
+    Placement(Placement &ref){
+        package=ref.package;
+        companycode=ref.companycode;
+    }
+     void show(){
+        cout<<package<<" "<<companycode;
+    }
+    /*Placement(int x,int y){
+        package=x;
+        companycode=y;
+    }
+    void show(){
+        cout<<package<<" "<companycode;
+    }*/
+};
+int main(){
+    Placement p1(22,04);
+      cout<<"this is called paratermized constructor"<<" ";
+    p1.show();
+  
+    Placement p2=p1;
+    cout<<"this is called copy constructor"<<" ";
+    p2.show();
+    
+  //  p1.companyname="mahindra";
+    //p1.totalstudents=34;
+    p1.setpackage(22);
+    p1.setcompanycode(200);
+  //  cout<<"this is company name"<<" "<<p1.companyname<<" total enrolled students is"<<" " <<p1.totalstudents<<endl;
+    cout<<endl<<"this is packge LPA"<<" "<<p1.getpackage()<<endl;
+    cout<<"this is company code"<<" " <<p1.getcompanycode()<<endl;
+    
+    return 0;
+    
+}
+
+4)destructor tilde symbol ~
+// C++ program to demonstrate the execution of constructor
+// and destructor
+
+#include <iostream>
+using namespace std;
+
+class Test {
+public:
+    // User-Defined Constructor
+    Test() { cout << "\n Constructor executed"; }
+
+    // User-Defined Destructor
+    ~Test() { cout << "\nDestructor executed"; }
+};
+main()
+{
+    Test t;
+
+    return 0;
+}
+
+----> Destructor ka simple matlab hai ek aisa function jo object ke life cycle ke end mein automatically call hota hai, jab wo memory se remove hone wala hota hai. Iska kaam object ke resources ko free karna ya clean-up karna hota hai, jaise ki memory release karna ya kisi file ko close karna.
+
+Destructor ke kuch points:
+Destructor ka naam class ke naam ke aage ~ (tilde) lagakar banta hai. Jaise, ~Goal().
+Destructor koi parameter nahi leta.
+Destructor ko manually call nahi karte; yeh automatically tab call hota hai jab object apna kaam khatam kar leta hai aur delete hone wala hota hai.
+#include<iostream>
+using namespace std;
+
+class Goal {
+    public:
+        string name;
+        string vision;
+        
+        ~Goal() { // Destructor
+            cout << "\nGoal: To become a software engineer\n";
+        }
+};
+
+int main() {
+    Goal g1;
+    cout << "Enter the first goal name: ";
+    cin >> g1.name;
+    cout << g1.name << " is a vision. Enter vision: ";
+    cin >> g1.vision;
+    return 0; // Destructor will be called here
+}
+
+
+
+5) exception handling:- try ,throw,catch
+
+#include<iostream>
+using namespace std;
+int main(){
+    try{// something which we try in our life as well in coding 
+        int numerator=10;
+        int denomiator=80;
+        int res;
+    
+    if(denomiator==0){
+        throw runtime_error("division by zero not allowed!");
+    }
+    res=numerator/denomiator;
+    cout<<"result after division"<<res<<endl;
+    }
+
+ catch (const exception& e) {//exception is a class in the C++ Standard Library that represents errors that can occur during runtime. By using const exception&
+e.what(): The what() function is a member function of the exception class. It returns a C-style string (const char*) that describes the exception. This message can vary based on the specific exception type, providing details on what went wrong.
+        // print the exception
+        cout << "Exception " << e.what() << endl;
+    }
+
+    return 0;
+}
+
+----> exception handling with class
+// C++ program to illustrate the concept 
+// of exception handling using class 
+
+#include <bits/stdc++.h> 
+using namespace std; 
+
+// Class declaration 
+class Number { 
+private: 
+	int a, b; 
+
+public: 
+	// Constructors 
+	Number(int x, int y) 
+	{ 
+		a = x; 
+		b = y; 
+	} 
+
+	// Function that find the GCD 
+	// of two numbers a and b 
+	int gcd() 
+	{ 
+		// While a is not equal to b 
+		while (a != b) { 
+
+			// Update a to a - b 
+			if (a > b) 
+				a = a - b; 
+
+			// Otherwise, update b 
+			else
+				b = b - a; 
+		} 
+
+		// Return the resultant GCD 
+		return a; 
+	} 
+
+	// Function to check if the 
+	// given number is prime 
+	bool isPrime(int n) 
+	{ 
+		// Base Case 
+		if (n <= 1) 
+			return false; 
+
+		// Iterate over the range [2, N] 
+		for (int i = 2; i < n; i++) { 
+
+			// If n has more than 2 
+			// factors, then return 
+			// false 
+			if (n % i == 0) 
+				return false; 
+		} 
+
+		// Return true 
+		return true; 
+	} 
+}; 
+
+// Empty class 
+class MyPrimeException { 
+}; 
+
+// Driver Code 
+int main() 
+{ 
+	int x = 13, y = 56; 
+
+	Number num1(x, y); 
+
+	// Print the GCD of X and Y 
+	cout << "GCD is = "
+		<< num1.gcd() << endl; 
+
+	// If X is prime 
+	if (num1.isPrime(x)) 
+		cout << x 
+			<< " is a prime number"
+			<< endl; 
+
+	// If Y is prime 
+	if (num1.isPrime(y)) 
+		cout << y 
+			<< " is a prime number"
+			<< endl; 
+
+	// Exception Handling 
+	if ((num1.isPrime(x)) 
+		|| (num1.isPrime(y))) { 
+
+		// Try Block 
+		try { 
+			throw MyPrimeException(); 
+		} 
+
+		// Catch Block 
+		catch (MyPrimeException t) { 
+
+			cout << "Caught exception "
+				<< "of MyPrimeException "
+				<< "class." << endl; 
+		} 
+	} 
+
+	return 0; 
+} 
+
+6) template-->(condition) ? value_if_true : value_if_false
+#include <iostream>
+using namespace std;
+
+template <class T> // 'template' should be lowercase and only declared once
+void show(T a, T b) {
+    cout << "a: " << a << " b: " << b << endl;
+}
+
+int main() {
+    int p = 10, q = 20;//In my code, a and b are parameter names for the show function. When you call show(p, q), the values of p and q are passed as arguments to a and b in the show function.
+    show(p, q);
+    return 0;
+}
+
+----> template with bubble sort
+
+#include <iostream>
+using namespace std;
+
+
+template <class T> void bubbleSort(T a[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+        for (int j = n - 1; i < j; j--)
+            if (a[j] < a[j - 1])
+                swap(a[j], a[j - 1]);
+}
+
+
+int main()
+{
+    int a[5] = { 10, 50, 30, 40, 20 };
+    int n = sizeof(a) / sizeof(a[0]);
+
+    // calls template function
+    bubbleSort<int>(a, n);
+
+    cout << " Sorted array : ";
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
+    cout << endl;
+
+    return 0;
+}
+
+
+7) virtual function 
+
+
+#include <iostream>
+using namespace std;
+
+class base {
+public:
+    virtual void print() { cout << "print base class\n"; }
+
+    void show() { cout << "show base class\n"; }
+};
+
+class derived : public base {
+public:
+    void print() { cout << "print derived class\n"; }
+
+    void show() { cout << "show derived class\n"; }
+};
+
+int main()
+{
+    base* bptr;
+    derived d;
+    bptr = &d;
+
+    // Virtual function, binded at runtime
+    bptr->print();
+
+    // Non-virtual function, binded at compile time
+    bptr->show();
+
+    return 0;
+}
+
+
+
+
+
+ 
+
+
