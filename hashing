@@ -1,0 +1,47 @@
+#include <iostream>
+#include <map>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    // Creation
+    unordered_map<string, int> m;
+    
+    // Insertion
+    pair<string, int> p = make_pair("ruchi", 2);
+    m.insert(p);
+    pair<string, int> pair2("Love", 3);
+    m.insert(pair2);
+    m["myself"] = 1;
+    m["myself"] = 4;  // Overwrites the previous value of "myself"
+
+    // Search
+    cout << m["mera"] << endl;          // "mera" is not in the map; will return default 0
+    cout << m["myself"] << endl;        // Should print 4
+    cout << m["Love"] << endl;          // Should print 3
+    cout << m.at("ruchi") << endl;      // Should print 2
+    cout << m.size() << endl;           // Should print size of the map
+    cout << m.count("yes") << endl;     // Should print 0 as "yes" is not present
+
+    // Erase
+    m.erase("Love");
+    cout << "this is size = " << m.size() << endl;
+
+    // Iterator
+    unordered_map<string, int>::iterator it = m.begin();
+    while (it != m.end()) {
+        cout << it->first << " " << it->second << endl;
+        it++;
+    }
+    
+    return 0;
+}
+
+hashing code(tc=o(1)) --> insertion/deletion/selection
+implement=linked-list-->o(n)
+bst--> o(log n)
+array--> o(1)
+1)open hashing(linear probing,quadratic probing)=(n/b<0.7)
+2)closed addressing
+hi(a)=h(a)+fi(a)
+
